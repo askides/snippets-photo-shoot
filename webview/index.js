@@ -19,12 +19,12 @@
   window.addEventListener("message", (e) => {
     if (e) {
       if (e.data.type === "init") {
-        const { fontFamily, bgColor } = e.data;
+        const { fontFamily, bgColor, html } = e.data;
 
         console.log(fontFamily, bgColor);
 
         const initialHtml = getInitialHtml(fontFamily);
-        snippetNode.innerHTML = initialHtml;
+        snippetNode.innerHTML = html;
       } else if (e.data.type === "update") {
         document.execCommand("paste");
       } else {

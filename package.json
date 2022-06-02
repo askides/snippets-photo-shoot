@@ -19,7 +19,22 @@
         "command": "extension.createSnippetShoot",
         "title": "Create Snippet Shoot"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.createSnippetShoot",
+          "group": "01_snippetsPhotoShoot"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "extension.createSnippetShoot",
+          "when": "true",
+          "group": "01_snippetsPhotoShoot@1"
+        }
+      ]
+    }
   },
   "scripts": {
     "lint": "eslint .",
