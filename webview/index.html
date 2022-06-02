@@ -1,19 +1,100 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Our Company</title>
+    <title>Snippets Photo Shoot</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <style>
+      .background {
+        padding: 1.5rem;
+        background: linear-gradient(
+          to right bottom,
+          #051937,
+          #004d7a,
+          #008793,
+          #00bf72,
+          #a8eb12
+        );
+      }
+
+      .terminal {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .terminal__bar {
+        display: flex;
+        gap: 0.5rem;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: #1d1f28;
+        padding: 1rem;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .terminal__shell {
+        padding: 1rem;
+        background-color: #0f111a;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+        /** Just for the Design **/
+        color: #ffffff;
+        font-size: 16px;
+        font-family: monospace;
+      }
+
+      /** Needs to be dynamic cuz is generated runtime **/
+      .terminal__shell > div {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        max-width: 100%;
+        white-space: pre-wrap !important;
+        word-break: break-all;
+      }
+
+      /** TODO: Better Selector **/
+      .terminal__shell > div > br:last-child {
+        display: none;
+      }
+
+      .terminal__bar__item {
+        border-radius: 100%;
+        width: 15px;
+        height: 15px;
+      }
+
+      .terminal__bar__item--yellow {
+        background-color: #f0f000;
+      }
+
+      .terminal__bar__item--red {
+        background-color: #e94b35;
+      }
+
+      .terminal__bar__item--green {
+        background-color: #1aaf5c;
+      }
+    </style>
   </head>
 
   <body>
-    <h1>Welcome to Our Company</h1>
-    <h2>Web Site Main Ingredients:</h2>
-
-    <p>Pages (HTML)</p>
-    <p>Style Sheets (CSS)</p>
-    <p>Computer Code (JavaScript)</p>
-    <p>Live Data (Files and Databases)</p>
-
-    <div id="snippet"></div>
+    <div class="background">
+      <div class="terminal">
+        <div class="terminal__bar">
+          <div class="terminal__bar__item terminal__bar__item--red"></div>
+          <div class="terminal__bar__item terminal__bar__item--yellow"></div>
+          <div class="terminal__bar__item terminal__bar__item--green"></div>
+        </div>
+        <div class="terminal__shell"></div>
+      </div>
+    </div>
 
     <script src="./index.js"></script>
   </body>

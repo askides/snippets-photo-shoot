@@ -1,9 +1,5 @@
 (() => {
-  const vscode = acquireVsCodeApi();
-
-  console.log("bucchina");
-
-  const snippetNode = document.getElementById("snippet");
+  const snippetNode = document.querySelector(".terminal__shell");
 
   const getInitialHtml = (fontFamily) => {
     const cameraWithFlashEmoji = String.fromCodePoint(128248);
@@ -13,23 +9,22 @@
 
   document.addEventListener("paste", (e) => {
     const innerHTML = e.clipboardData.getData("text/html");
-    snippetNode.innerHTML = innerHTML;
+    const innerHTMLWithoutBackground = innerHTML.replace(
+      /background-color: (#[a-fA-F0-9]+)/,
+      ""
+    );
+    snippetNode.innerHTML = innerHTMLWithoutBackground;
   });
 
   window.addEventListener("message", (e) => {
-    if (e) {
-      if (e.data.type === "init") {
-        const { fontFamily, bgColor, html } = e.data;
-
-        console.log(fontFamily, bgColor);
-
-        const initialHtml = getInitialHtml(fontFamily);
-        snippetNode.innerHTML = html;
-      } else if (e.data.type === "update") {
+    switch (e.data.type) {
+      case "init":
+      case "update":
         document.execCommand("paste");
-      } else {
+        break;
+      default:
         console.log("Unknown message");
-      }
+        break;
     }
   });
 })();

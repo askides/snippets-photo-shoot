@@ -2,13 +2,14 @@ const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
 
-const editor = vscode.window.activeTextEditor;
-
 function activate(context) {
   let panel = null;
+
   const htmlPath = path.resolve(context.extensionPath, "webview/index.html");
 
-  const text = editor.document.getText(editor.selection);
+  vscode.commands.executeCommand(
+    "editor.action.clipboardCopyWithSyntaxHighlightingAction"
+  );
 
   vscode.commands.registerCommand("extension.createSnippetShoot", () => {
     panel = vscode.window.createWebviewPanel(
@@ -26,16 +27,12 @@ function activate(context) {
     panel.webview.html = getHtmlContent(htmlPath);
 
     const fontFamily = vscode.workspace.getConfiguration("editor").fontFamily;
-    const bgColor = context.globalState.get("polacode.bgColor", "#2e3440");
+
     panel.webview.postMessage({
       type: "init",
       fontFamily,
-      bgColor,
-      html: text,
     });
   });
-
-  //   context.subscriptions.push(disposable);
 }
 
 // TODO: Da capire perchè
