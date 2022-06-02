@@ -1,16 +1,45 @@
 const vscode = require("vscode");
+const fs = require("fs");
+const path = require("path");
 
 function activate(context) {
-  let disposable = vscode.commands.registerCommand(
-    "snippets-photo-shoot.helloWorld",
-    function () {
-      vscode.window.showInformationMessage(
-        "Hello World from Snippets Photo Shoot!"
-      );
-    }
-  );
+  let panel = null;
+  const htmlPath = path.resolve(context.extensionPath, "webview/index.html");
 
-  context.subscriptions.push(disposable);
+  vscode.commands.registerCommand("extension.createSnippetShoot", () => {
+    panel = vscode.window.createWebviewPanel(
+      "Snippet Photo Shoot",
+      "Snippet Photo Shoot",
+      2,
+      {
+        enableScripts: true,
+        localResourceRoots: [
+          vscode.Uri.file(path.join(context.extensionPath, "webview")),
+        ],
+      }
+    );
+
+    panel.webview.html = getHtmlContent(htmlPath);
+
+    const fontFamily = vscode.workspace.getConfiguration("editor").fontFamily;
+    const bgColor = context.globalState.get("polacode.bgColor", "#2e3440");
+    panel.webview.postMessage({
+      type: "init",
+      fontFamily,
+      bgColor,
+    });
+  });
+
+  //   context.subscriptions.push(disposable);
+}
+
+// TODO: Da capire perchè
+function getHtmlContent(htmlPath) {
+  const htmlContent = fs.readFileSync(htmlPath, "utf-8");
+  return htmlContent.replace(/script src="([^"]*)"/g, (match, src) => {
+    const realSource = "vscode-resource:" + path.resolve(htmlPath, "..", src);
+    return `script src="${realSource}"`;
+  });
 }
 
 function deactivate() {}
