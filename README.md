@@ -6,7 +6,9 @@ Create beautiful code snippets from your VSCode environment.
 
 ## How it works
 
-Select the code snippet you want to use, then right click on the snippet and select "Create Snippet Shoot".
+Select the code snippet you want to use, then **right click** on the snippet and select "**Create Snippet Shoot**".
+
+![Right Click](./images/right-click.png)
 
 A preview of the snippet will be shown in the editor, press the save button, choose a name for the snippet and a folder to save it in.
 
