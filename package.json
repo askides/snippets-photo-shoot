@@ -5,6 +5,7 @@
   "icon": "images/icon.png",
   "version": "0.0.1",
   "publisher": "itsrennyman",
+  "repository": "https://github.com/itsrennyman/snippets-photo-shoot",
   "engines": {
     "vscode": "^1.67.0"
   },
