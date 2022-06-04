@@ -3,7 +3,7 @@
   "displayName": "Snippets Photo Shoot",
   "description": "Extract beautiful snippets directly from your VSCode",
   "icon": "images/icon.png",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "itsrennyman",
   "repository": "https://github.com/itsrennyman/snippets-photo-shoot",
   "engines": {
