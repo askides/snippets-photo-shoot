@@ -1,7 +1,7 @@
 {
   "name": "snippets-photo-shoot",
   "displayName": "Snippets Photo Shoot",
-  "description": "Extract beautiful snippets directly from your VSCode",
+  "description": "Create beautiful code snippets from your VSCode environment.",
   "icon": "images/icon.png",
   "version": "0.1.0",
   "publisher": "itsrennyman",
