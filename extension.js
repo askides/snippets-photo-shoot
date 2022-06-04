@@ -3,8 +3,6 @@ const fs = require("fs");
 const path = require("path");
 
 function activate(context) {
-  let panel = null;
-
   const htmlPath = path.resolve(context.extensionPath, "webview/index.html");
 
   vscode.commands.executeCommand(
@@ -12,7 +10,7 @@ function activate(context) {
   );
 
   vscode.commands.registerCommand("extension.createSnippetShoot", () => {
-    panel = vscode.window.createWebviewPanel(
+    const panel = vscode.window.createWebviewPanel(
       "Snippet Photo Shoot",
       "Snippet Photo Shoot",
       2,
@@ -25,6 +23,30 @@ function activate(context) {
     );
 
     panel.webview.html = getHtmlContent(htmlPath);
+
+    panel.webview.onDidReceiveMessage((message) => {
+      switch (message.command) {
+        case "save":
+          vscode.window
+            .showSaveDialog({
+              filters: {
+                Images: ["png"],
+              },
+            })
+            .then((uri) => {
+              if (uri) {
+                fs.writeFileSync(
+                  uri.fsPath,
+                  Buffer.from(message.data, "base64")
+                );
+              }
+            });
+          break;
+        default:
+          console.log("Unknown message");
+          break;
+      }
+    });
 
     const fontFamily = vscode.workspace.getConfiguration("editor").fontFamily;
 
