@@ -3,14 +3,15 @@ const fs = require("fs");
 const path = require("path");
 
 function activate(context) {
+  let panel = undefined;
   const htmlPath = path.resolve(context.extensionPath, "webview/index.html");
 
-  vscode.commands.executeCommand(
-    "editor.action.clipboardCopyWithSyntaxHighlightingAction"
-  );
-
   vscode.commands.registerCommand("extension.createSnippetShoot", () => {
-    const panel = vscode.window.createWebviewPanel(
+    vscode.commands.executeCommand(
+      "editor.action.clipboardCopyWithSyntaxHighlightingAction"
+    );
+
+    panel = vscode.window.createWebviewPanel(
       "Snippet Photo Shoot",
       "Snippet Photo Shoot",
       2,
